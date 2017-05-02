@@ -9,4 +9,4 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 PYPATH="${SCRIPTPATH}/jeopardy.py"
 
 #Runs jeopardy.py script
-python "$PYPATH"
+python3 "$PYPATH"

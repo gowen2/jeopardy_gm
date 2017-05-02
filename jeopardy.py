@@ -15,10 +15,10 @@ play=1
 #Gets path to CSV file of question dataset
 CSVpath = script_dir+"/JEOPARDY_CSV.csv"
 #Gets number of lines/questions in CSV
-with open(CSVpath, newline='', encoding="utf-8",errors='ignore') as csvfile:
+with open(CSVpath, newline='',errors='ignore') as csvfile:
     num_rows = sum(1 for line in csvfile)
 
-with open(CSVpath,'rt', newline='', encoding="utf-8",errors='ignore') as csvfile:
+with open(CSVpath,'rt', newline='',errors='ignore') as csvfile:
     #Creates reader object for csv file and makes rows as list of arrays
     reader = csv.reader( csvfile, delimiter=',' )
     rows = list(reader)
