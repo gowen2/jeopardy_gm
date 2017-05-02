@@ -1,6 +1,8 @@
 #Script to give random Jeopardy! question, record answer, and keep running money total
 #George Owen, 2017-05-01
 
+#THIS IS ONLY COMPATIBLE WITH PYTHON 3.*+
+
 import csv, random, os, codecs, sys
 
 #Gets full path of jeopardy.py script (this script)
