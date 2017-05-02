@@ -1,0 +1,6 @@
+[Options]
+CSVPath = JEOPARDY_CSV.csv
+
+[Save]
+RunningTotal = 0
+

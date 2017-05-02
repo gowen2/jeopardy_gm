@@ -3,27 +3,23 @@
 
 #THIS IS ONLY COMPATIBLE WITH PYTHON 3.*+
 
-import csv, random, os, codecs, sys
+import csv, random, os, codecs, sys, configparser
 
-#Gets full path of jeopardy.py script (this script)
-script_dir = os.path.abspath(os.path.dirname(__file__))
+CONFIG_LOCATION = 'config.ini'
 
-#Imports tot variable (running money total) with value from total_jep.py
-from total_jep import *
+config = configparser.ConfigParser()
+config.read(CONFIG_LOCATION)
 
 #Initializes play variable to 1 (1 = play a rounds, 0 = exit) 
 play=1
+tot = int(config['Save']['RunningTotal'])
 
-#Gets path to CSV file of question dataset
-CSVpath = script_dir+"/JEOPARDY_CSV.csv"
 #Gets number of lines/questions in CSV
-with open(CSVpath, newline='',errors='ignore') as csvfile:
-    num_rows = sum(1 for line in csvfile)
-
-with open(CSVpath,'rt', newline='',errors='ignore') as csvfile:
+with open(config['Options']['CSVPath'], newline='',errors='ignore') as csvfile:
     #Creates reader object for csv file and makes rows as list of arrays
     reader = csv.reader( csvfile, delimiter=',' )
     rows = list(reader)
+    num_rows = len(rows)
 
 while play == 1:
     os.system("clear")
@@ -51,23 +47,19 @@ while play == 1:
      
     #Adds question value to total if yes
     if user_corr == "y" or user_corr == "yes":
-        tot=tot+int(value)
-        print ("Running Total: "+str(tot)+"\n")
-     
+        tot += int(value)
     #Subtracts question value from total if no
     elif user_corr == "n" or user_corr == "no":
-        tot=tot-int(value)
-        print ("Running Total: "+str(tot)+"\n")
-     
+        tot -= int(value)
     #Leaves total unchanged if [return] or any input besides y/yes or n/no
     else:
-        tot=tot
         print ("Question skipped!")
-        print ("Running Total: "+str(tot)+"\n")
+    print ("Running Total: "+str(tot)+"\n")
 
-    #Overwrites new running total value to total_jep.py
-    totfile = open(script_dir+'/total_jep.py', 'w')
-    totfile.write("tot = "+str(tot))
+    # Saves running total to config file
+    config['Save']['RunningTotal'] = str(tot)
+    with open(CONFIG_LOCATION, 'w') as configfile:
+        config.write(configfile)
 
     #Asks user if they want to play again and sets play value
     user_play = input("Play Again (y or n)?: ").lower()

@@ -1,3 +1,7 @@
+# Python runtime artifacts
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Config file
+config.ini
