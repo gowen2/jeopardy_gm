@@ -23,7 +23,7 @@ class GMHandler(BaseHTTPRequestHandler):
 
 	def reply(self, post_data):
 		global state
-		d = json.loads(post_data)
+		d = json.loads(post_data.decode('utf-8'))
 		if d['text'].lower().startswith(config['Options']['GroupMeCommand']):
 			if state == '':
 				category, value, question, answer = random.choice(rows)[3:7]
