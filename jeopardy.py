@@ -3,7 +3,7 @@
 
 #THIS IS ONLY COMPATIBLE WITH PYTHON 3.*+
 
-import csv, random, os, codecs, sys, configparser
+import csv, random, os, sys, configparser
 
 CONFIG_LOCATION = 'config.ini'
 
@@ -21,7 +21,7 @@ with open(config['Options']['CSVPath'], newline='',errors='ignore') as csvfile:
     rows = list(reader)
     num_rows = len(rows)
 
-while play == 1:
+while play == 1 and __name__ == "__main__":
     os.system("clear")
     #Generates random int between 1 and number of rows/questions in csv
     rand = random.randint(1, num_rows-1)

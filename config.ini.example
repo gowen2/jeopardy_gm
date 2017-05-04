@@ -1,5 +1,10 @@
 [Options]
 CSVPath = JEOPARDY_CSV.csv
+GroupMeHost = localhost
+GroupMePort = 8000
+GroupMeBotID = xxxxxxxxx
+GroupMeAPI = https://api.groupme.com/v3/bots/post
+GroupMeCommand = jeopardy
 
 [Save]
 RunningTotal = 0
